@@ -3,29 +3,33 @@
     -------------------------------------
     | Visibility_Enhanced Script by Zanko |
     -------------------------------------
-    =========== Version 1.0 ===========
+    =========== Version 1.0a ===========
     Description:
     ------------
         Enhanced version of visible by enemy. Set in config files what to reveal.
         
     Change log:
     ----------
+        Version 1.0a - 25th February 2015 1:00PM:
+            - Fixed effect given to unspawned creeps
+            - Includes Utils
+            
         Version 1.0 - 24th February 2015 3:18PM:
             - Initial release.
 ]]--
 require("libs.ScriptConfig")
-
+require("libs.Utils")
 
 config = ScriptConfig.new()
 config:SetParameter("Visible_Self", true)
 config:SetParameter("Visible_Allies", true)
 config:SetParameter("Visible_Neutral", true)
 config:SetParameter("Visible_Courier", true)
+config:SetParameter("Visible_Mines", true)
 config:SetParameter("Visible_Creep", true)
 config:SetParameter("Visible_Ward", true)
-config:SetParameter("Visible_Mines", true)
-config:SetParameter("Visible_Summon_Misc", true)
 config:SetParameter("Visible_Building", true)
+config:SetParameter("Visible_Summon_Misc", true)
 
 -- Not yet supported --
 config:SetParameter("Visible_Roshan", false)
@@ -36,12 +40,13 @@ local Visible_Self = config.Visible_Self
 local Visible_Allies = config.Visible_Allies
 local Visible_Neutral = config.Visible_Neutral
 local Visible_Courier = config.Visible_Courier
+local Visible_Mines = config.Visible_Mines
 local Visible_Creep = config.Visible_Creep
 local Visible_Ward = config.Visible_Ward
-local Visible_Mines = config.Visible_Mines
-local Visible_Building = config.Visible_Building
 local Visible_Summon_Misc = config.Visible_Summon_Misc
+local Visible_Building = config.Visible_Building
 
+-- Not yet supported --
 local Visible_Rune = config.Visible_Rune
 local Visible_Roshan = config.Visible_Roshan
 
@@ -52,7 +57,7 @@ local visibilityEffect = {}
 function Tick(tick)
     currentTick = tick
 
-    if not PlayingGame() or client.console or not SleepCheck("stop") then return end
+    if not client.connected or client.loading or not PlayingGame() or client.console or not SleepCheck("stop") then return end
     if sleepTick and sleepTick > tick then return end
 
     Sleep(200)
@@ -72,7 +77,9 @@ function Tick(tick)
     if Visible_Neutral then
         local neutral = entityList:FindEntities({classId = CDOTA_BaseNPC_Creep_Neutral})    
         for _,v in ipairs(neutral) do 
-            drawEffect(v, "aura_shivas")
+            if v.spawned then
+                drawEffect(v, "aura_shivas")
+            end
         end
     end
     
@@ -87,7 +94,9 @@ function Tick(tick)
     if Visible_Creep then
         local creep = entityList:FindEntities({classId = CDOTA_BaseNPC_Creep_Lane, team = me.team})
         for _,v in ipairs(creep) do 
-            drawEffect(v, "aura_shivas")
+            if v.spawned then
+                drawEffect(v, "aura_shivas")
+            end
         end
     end
     
