@@ -1,15 +1,18 @@
---<<Visibility_Enhanced script by Zanko version 1.0a>>
+--<<Visibility_Enhanced script by Zanko version 1.0b>>
 --[[
     -------------------------------------
     | Visibility_Enhanced Script by Zanko |
     -------------------------------------
-    =========== Version 1.0a ===========
+    =========== Version 1.0b ===========
     Description:
     ------------
         Enhanced version of visible by enemy. Set in config files what to reveal.
         
     Change log:
     ----------
+		Version 1.0b - 25th February 2015 2:22PM:
+            - Fixed config duplication bug
+			
         Version 1.0a - 25th February 2015 1:00PM:
             - Fixed effect given to unspawned creeps
             - Includes Utils
@@ -21,34 +24,34 @@ require("libs.ScriptConfig")
 require("libs.Utils")
 
 config = ScriptConfig.new()
-config:SetParameter("Visible_Self", true)
-config:SetParameter("Visible_Allies", true)
-config:SetParameter("Visible_Neutral", true)
-config:SetParameter("Visible_Courier", true)
-config:SetParameter("Visible_Mines", true)
-config:SetParameter("Visible_Creep", true)
-config:SetParameter("Visible_Ward", true)
-config:SetParameter("Visible_Building", true)
-config:SetParameter("Visible_Summon_Misc", true)
+config:SetParameter("Self", true)
+config:SetParameter("Allies", true)
+config:SetParameter("Neutral", true)
+config:SetParameter("Courier", true)
+config:SetParameter("Mines", true)
+config:SetParameter("Creep", true)
+config:SetParameter("Ward", true)
+config:SetParameter("Building", true)
+config:SetParameter("SummonMisc", true)
 
 -- Not yet supported --
-config:SetParameter("Visible_Roshan", false)
-config:SetParameter("Visible_Rune", false)
+config:SetParameter("VisibleRoshan", false)
+config:SetParameter("VisibleRune", false)
 config:Load()
 
-local Visible_Self = config.Visible_Self
-local Visible_Allies = config.Visible_Allies
-local Visible_Neutral = config.Visible_Neutral
-local Visible_Courier = config.Visible_Courier
-local Visible_Mines = config.Visible_Mines
-local Visible_Creep = config.Visible_Creep
-local Visible_Ward = config.Visible_Ward
-local Visible_Summon_Misc = config.Visible_Summon_Misc
-local Visible_Building = config.Visible_Building
+Visible_Self = config.Self
+Visible_Allies = config.Allies
+Visible_Neutral = config.Neutral
+Visible_Courier = config.Courier
+Visible_Mines = config.Mines
+Visible_Creep = config.Creep
+Visible_Ward = config.Ward
+Visible_Summon_Misc = config.SummonMisc
+Visible_Building = config.Building
 
 -- Not yet supported --
-local Visible_Rune = config.Visible_Rune
-local Visible_Roshan = config.Visible_Roshan
+local Visible_Rune = config.VisibleRune
+local Visible_Roshan = config.VisibleRoshan
 
 
 
