@@ -1,4 +1,4 @@
---<<Visibility_Enhanced script by Zanko version 1.0>>
+--<<Visibility_Enhanced script by Zanko version 1.0a>>
 --[[
     -------------------------------------
     | Visibility_Enhanced Script by Zanko |
